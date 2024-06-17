@@ -17,7 +17,13 @@ contract Scroller {
         return status;
     }
 
+    function setStatus(string calldata novoStatus) public {
+        require(mappingAutores[msg.sender], "Endereco nao cadastrado como autor");
+        status = novoStatus;
+    }
+
     function publicaPost(string calldata _titulo, string calldata _conteudo) external {
+        require(mappingAutores[msg.sender], "Endereco nao cadastrado como autor");
         id += 1;
         emit Post(id,_titulo,_conteudo);
     }

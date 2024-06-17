@@ -15,12 +15,25 @@ const web3 = new Web3(`http://${blockchainAddress}:${blockchainPort}`);
 
 // pegando a ABI do contrato
 const fs = require('fs');
-const jsonFile = '..\\artifacts\\contracts\\Rocket.sol\\Rocket.json'; // Adjust the path as needed
+const jsonFile = '..\\hardhat\\artifacts\\contracts\\Scroller.sol\\Scroller.json'; // Adjust the path as needed
 const parsed = JSON.parse(fs.readFileSync(jsonFile));
 const contractABI = parsed.abi;
 
 // Create contract instance
 const contract = new web3.eth.Contract(contractABI, smartContractAddress);
+
+app.get('/status', async (req, res) => {
+    try {
+        // Call the getMessage function
+        const message = await contract.methods.getStatus().call();
+        
+        // Send the message as the response
+        res.send(`{"status": "${message}" }`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error retrieving message from smart contract');
+    }
+});
 
 app.get('/', async (req, res) => {
     try {
@@ -28,7 +41,7 @@ app.get('/', async (req, res) => {
         const message = await contract.methods.getStatus().call();
         
         // Send the message as the response
-        res.send(`<h1>Message from Smart Contract: ${message}</h1>`);
+        res.send(`{"status": "${message}" }`);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error retrieving message from smart contract');

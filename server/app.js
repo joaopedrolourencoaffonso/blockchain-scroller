@@ -35,13 +35,23 @@ app.get('/status', async (req, res) => {
     }
 });
 
-app.get('/', async (req, res) => {
+app.get('/posts', async (req, res) => {
     try {
         // Call the getMessage function
-        const message = await contract.methods.getStatus().call();
+        let events = await contract.getPastEvents('allEvents', {
+            fromBlock: 0, // Start from the first block
+            toBlock: 'latest' // Up to the latest block
+        });
+
+        let answerjson = '[';
+        for (let event of events) {
+            answerjson = answerjson + '{"id": "' + event['returnValues']['0'] + '","titulo": "' + event['returnValues']['titulo'] + '", "conteudo": "' + event['returnValues']['conteudo'] + '"},';
+        }
+        answerjson = answerjson.slice(0, -1) + ']';
         
         // Send the message as the response
-        res.send(`{"status": "${message}" }`);
+        res.setHeader('Content-Type', 'application/json');
+        res.send(answerjson);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error retrieving message from smart contract');

@@ -3,11 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My App</title>
+    <title>Scroller</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <h1>Bem vindo ao Scroller!</h1>
     <p><%= message %></p>
+    <div id="retangulo">
+        <ul id="posts">
+
+        </ul>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            pegaPost();
+        });
+        async function pegaPost() {
+            let inicio = 10;
+            let fim = 49;
+            const response = await fetch(`http://localhost:3000/posts/${inicio}/${fim}`);
+            const data = await response.json();
+            
+            for (let i = inicio; i <= fim; i++) {
+                const list = document.getElementById('posts');
+                const listItem = document.createElement('li');
+                listItem.textContent = data[i]['titulo'] + " => " + data[i]['conteudo'];
+                list.appendChild(listItem);
+            }
+        }
+    </script>
 </body>
 </html>

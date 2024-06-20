@@ -9,9 +9,10 @@ async function main() {
     // Adiciona eleitor
     let approveTx;
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 50; i++) {
       approveTx = await contrato.publicaPost("post " + i,"conteudo");
       approveTx.wait();
+      console.log(`Post nº ${i} publicado.`);
     }
     
 

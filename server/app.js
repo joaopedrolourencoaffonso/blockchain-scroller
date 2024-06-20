@@ -66,7 +66,7 @@ app.get('/posts/:inicio/:fim', async (req, res) => {
             id: post.id.toString(),
             titulo: post.titulo,
             conteudo: post.conteudo
-        }))
+        }));
 
         // Send the message as the response
         res.setHeader('Content-Type', 'application/json');

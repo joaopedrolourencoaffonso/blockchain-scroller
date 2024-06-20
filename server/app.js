@@ -22,20 +22,62 @@ const contractABI = parsed.abi;
 // Create contract instance
 const contract = new web3.eth.Contract(contractABI, smartContractAddress);
 
+// Set the view engine to ejs
+app.set('view engine', 'ejs');
+
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
+
+// http://localhost:3000/?param1=value1&param2=value2
+// Define a route that renders the index.ejs template
+app.get('/', (req, res) => {
+    try {
+        res.render('index', { message: 'Olá Lua!' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error retrieving message from smart contract');
+    }
+})
+
 app.get('/status', async (req, res) => {
     try {
         // Call the getMessage function
-        const message = await contract.methods.getStatus().call();
+        const status = await contract.methods.getStatus().call();
         
         // Send the message as the response
-        res.send(`{"status": "${message}" }`);
+        res.setHeader('Content-Type', 'application/json');
+        res.send(`[{"status": "${status}"}]`);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error retrieving message from smart contract');
     }
 });
 
-app.get('/posts', async (req, res) => {
+app.get('/posts/:inicio/:fim', async (req, res) => {
+    try {
+        const inicio = req.params.inicio;
+        const fim = req.params.fim;
+
+        // Call the retornaPost function
+        const posts = await contract.methods.retornaPost(inicio,fim).call();
+        
+        // Convertendo BigInt em string para retornar como json
+        const formattedPosts = posts.map(post => ({
+            id: post.id.toString(),
+            titulo: post.titulo,
+            conteudo: post.conteudo
+        }))
+
+        // Send the message as the response
+        res.setHeader('Content-Type', 'application/json');
+        res.send(formattedPosts);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error retrieving message from smart contract');
+    }
+});
+
+app.get('/allPosts', async (req, res) => {
     try {
         // Call the getMessage function
         let events = await contract.getPastEvents('allEvents', {

@@ -9,12 +9,11 @@ async function main() {
     // Adiciona eleitor
     let approveTx;
 
-    approveTx = await contrato.publicaPost("titulo","conteudo");
-    approveTx.wait();
-    approveTx = await contrato.publicaPost("titulo","conteudo");
-    approveTx.wait();
-    approveTx = await contrato.publicaPost("titulo","conteudo");
-    approveTx.wait();
+    for (let i = 1; i <= 10; i++) {
+      approveTx = await contrato.publicaPost("post " + i,"conteudo");
+      approveTx.wait();
+    }
+    
 
   } catch (error) {
     console.error(error);

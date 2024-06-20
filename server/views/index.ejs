@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scroller</title>
-    <link rel="stylesheet" href="/styles.css">
+    <!--<link rel="stylesheet" href="/styles.css">-->
 </head>
 <body>
     <h1>Bem vindo ao Scroller!</h1>
     <p><%= message %></p>
-    <div id="retangulo">
-        <ul id="posts">
-
-        </ul>
+    <div id="posts">
     </div>
     
     <script>
@@ -20,16 +17,26 @@
             pegaPost();
         });
         async function pegaPost() {
-            let inicio = 10;
-            let fim = 49;
+            let inicio = 1;
+            let fim = 15;
             const response = await fetch(`http://localhost:3000/posts/${inicio}/${fim}`);
             const data = await response.json();
             
-            for (let i = inicio; i <= fim; i++) {
-                const list = document.getElementById('posts');
-                const listItem = document.createElement('li');
-                listItem.textContent = data[i]['titulo'] + " => " + data[i]['conteudo'];
-                list.appendChild(listItem);
+            for (let i = data.length - 1; i > 0; i--) {
+                
+                const posts = document.getElementById('posts');
+                const postDiv = document.createElement('div');
+                postDiv.setAttribute('id', 'post-box'); // Set the id attribute to "post-box"
+                
+                const title = document.createElement('h2');
+                title.textContent = data[i]['titulo'];
+                
+                const content = document.createElement('p');
+                content.textContent = data[i]['conteudo'];
+                
+                postDiv.appendChild(title);
+                postDiv.appendChild(content);
+                posts.appendChild(postDiv);
             }
         }
     </script>

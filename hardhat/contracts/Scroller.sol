@@ -49,4 +49,8 @@ contract Scroller {
         
         return posts;
     }
+
+    function getId() public view returns (uint256) {
+        return id;
+    }
 }

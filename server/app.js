@@ -53,6 +53,20 @@ app.get('/status', async (req, res) => {
     }
 });
 
+app.get('/getid', async (req, res) => {
+    try {
+        // Call the getMessage function
+        const id = await contract.methods.getId().call();
+        
+        // Send the message as the response
+        res.setHeader('Content-Type', 'application/json');
+        res.send(`[{"id": ${id}}]`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error retrieving message from smart contract');
+    }
+});
+
 app.get('/posts/:inicio/:fim', async (req, res) => {
     try {
         const inicio = req.params.inicio;

@@ -7,18 +7,17 @@
     <!--<link rel="stylesheet" href="/styles.css">-->
 </head>
 <body>
-    <h1>Bem vindo ao Scroller!</h1>
+    <h1>Bem vindo ao meu Blog!</h1>
     <p><%= message %></p>
     <div id="posts">
     </div>
     
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            pegaPost();
+        document.addEventListener('DOMContentLoaded', async (event) => {
+            const id = await ultimoId();
+            pegaPost(id - 10,id);
         });
-        async function pegaPost() {
-            let inicio = 1;
-            let fim = 15;
+        async function pegaPost(inicio, fim) {
             const response = await fetch(`http://localhost:3000/posts/${inicio}/${fim}`);
             const data = await response.json();
             
@@ -38,6 +37,12 @@
                 postDiv.appendChild(content);
                 posts.appendChild(postDiv);
             }
+        }
+
+        async function ultimoId() {
+            const response = await fetch(`http://localhost:3000/getId`);
+            const last_id = await response.json();
+            return last_id[0]['id'];
         }
     </script>
 </body>

@@ -37,7 +37,16 @@ app.get('/', (req, res) => {
         console.error(error);
         res.status(500).send('Error retrieving message from smart contract');
     }
-})
+});
+
+app.get('/publicar', (req, res) => {
+    try {
+        res.render('publicar', { title: 'Connect Metamask to your Web Application' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error retrieving message from smart contract');
+    }
+});
 
 app.get('/status', async (req, res) => {
     try {

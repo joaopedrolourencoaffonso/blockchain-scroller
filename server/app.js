@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 
 app.get('/publicar', (req, res) => {
     try {
-        res.render('publicar', { title: 'Connect Metamask to your Web Application' });
+        res.render('publicar', { title: 'Connect Metamask to your Web Application', ABIdoContrato: `${contractABI}` });
     } catch (error) {
         console.error(error);
         res.status(500).send('Error retrieving message from smart contract');

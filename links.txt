@@ -1,3 +1,4 @@
 https://medium.com/@thelasthash/solved-nonce-too-high-error-with-metamask-and-hardhat-adc66f092cd
 https://medium.com/@kaishinaw/connect-metamask-with-ethers-js-fc9c7163fd4d
 https://medium.com/@kaishinaw/connecting-metamask-to-your-web-application-express-99c155c56665
+https://docs.ethers.org/v5/getting-started/ -> como importar o ether.js

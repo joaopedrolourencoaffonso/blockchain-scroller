@@ -1,6 +1,13 @@
 # blockchain-scroller
-Aplicativo similar à rede social, que irá listar eventos de smart contract no formato de "scroller"
 
+Um pequneo aplicativo de blog baseado em blockchain criado como um projeto pessoal para se familiarizar com as tecnologias do mercado. Está disponível em duas versões, uma para rede aberta, no qual o servidor simplesmente provê os arquivos e o usuário interage diretamente com a rede, e um para redes fechadas, no qual o servidor age como um proxy entre o usuário e a rede.
+
+## Status
+
+Em desenvolvimento. Atualmente o aplicativo é capaz de:
+
+- requisitar posts do smart contract e listar para o usuário leigo
+- Conectar com a metamask e permitir que autores publiquem novos posts
 
 ## Agradecimentos
 
@@ -8,3 +15,7 @@ Foto de plano de fundo do aplicativo disponibilizada pela <a href="https://unspl
 
 
 [Aw Kai Shin](https://medium.com/@kaishinaw?source=post_page-----99c155c56665--------------------------------) obrigado pelo excelente tutorial sobre uso do SDK da metamask: https://medium.com/@kaishinaw/connecting-metamask-to-your-web-application-express-99c155c56665
+
+[Viktor on Web3](https://www.youtube.com/watch?v=x61ntVrOz_c), obrigado pelo excelente tutorial sobre como usar o ether.js e associá-lo a metamask.
+
+

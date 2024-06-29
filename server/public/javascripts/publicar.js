@@ -3,9 +3,22 @@
 let provider = new ethers.providers.Web3Provider(window.ethereum);
 let signer
 
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-
+let contractAddress;
 let contractABI;
+
+
+fetch('/contractAddress')
+  .then(response => response.json())
+  .then(data => {
+    //console.log(data[0]['endereco']);
+    contractAddress = data[0]['endereco']; // Assuming the ABI is an array or object
+    // Now you can use the contractABI in your code
+    //console.log(contractAddress);
+  })
+  .catch(error => {
+    console.error('Error fetching contract ABI:', error);
+  }
+);
 
 // Fetch the contract ABI from the URL
 fetch('/js/contractABI.json')

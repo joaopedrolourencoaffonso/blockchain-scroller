@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 
 app.get('/publicar', (req, res) => {
     try {
-        res.render('publicar', { title: 'Connect Metamask to your Web Application', ABIdoContrato: `${contractABI}` });
+        res.render('publicar', { enderecoDoContrato: smartContractAddress });
     } catch (error) {
         console.error(error);
         res.status(500).send('Error retrieving message from smart contract');
@@ -56,6 +56,17 @@ app.get('/status', async (req, res) => {
         // Send the message as the response
         res.setHeader('Content-Type', 'application/json');
         res.send(`[{"status": "${status}"}]`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error retrieving message from smart contract');
+    }
+});
+
+app.get('/contractAddress', async (req, res) => {
+    try {
+        // Send the message as the response
+        res.setHeader('Content-Type', 'application/json');
+        res.send(`[{"endereco": "${smartContractAddress}"}]`);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error retrieving message from smart contract');

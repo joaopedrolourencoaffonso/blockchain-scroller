@@ -42,6 +42,19 @@ const contractABI = [
     "type": "event"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "novoAutor",
+        "type": "address"
+      }
+    ],
+    "name": "addAutor",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getId",
     "outputs": [
@@ -139,7 +152,7 @@ const contractABI = [
     "stateMutability": "nonpayable",
     "type": "function"
   }
-]
+];
 
 async function connectMetamask() {
   await provider.send("eth_requestAccounts",[]);

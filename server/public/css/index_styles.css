@@ -1,0 +1,77 @@
+body{
+    background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+  }
+  
+.post-box {
+    width: 50%;
+    background-color: white; /* White background for the box */
+    padding: 20px;
+    border-radius: 10px; /* Optional: rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: shadow for better visibility */
+    text-align: left; /* Center text within the box */
+    position: relative;
+    left: 25%;
+    right: 20%;
+    max-width: 90%; /* Adjust as necessary to ensure it doesn't get too wide */
+    max-height: 90%; /* Adjust as necessary to ensure it doesn't get too tall */
+    overflow: auto; /* Adds scrollbars if content overflows */
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+}
+
+/* Ensuring all child elements of .post-box are centered */
+.post-box * {
+    margin: 10px 0; /* Optional: margin for child elements */
+}
+
+.post-box img {
+    max-width: 100%; /* Ensures the image does not exceed the width of the .post-box */
+    height: auto; /* Maintains the aspect ratio of the image */
+    display: block; /* Ensures there is no extra space below the image */
+}
+
+.button {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    position: relative;
+    left: 25%;
+    right: 20%;
+    width: 50%;
+  }
+  
+.button:hover {
+    background-color: #555555;
+    color: white;
+}
+/*Referente a barra superior*/
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+}

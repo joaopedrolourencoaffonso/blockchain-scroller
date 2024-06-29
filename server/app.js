@@ -3,7 +3,7 @@ const express = require('express');
 const { Web3 } = require('web3');
 
 const app = express();
-const port = 3000;
+const port = process.env.SERVER_PORT;
 
 // Load environment variables
 const blockchainAddress = process.env.ADDRESS;

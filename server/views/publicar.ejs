@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-      <button class="enableEthereumButton">Connect to Metamask</button>
-      <h2>Account: <span class="showAccount"></span></h2>
-      <h2>Chain ID: <span class="showChainId"></span></h2>
-    <br>
-    <h1>Send ETH using Web App</h1>
-      <form id="sendETH">
-        <h2>Send to:</h2>
-        <input type="text" id="addressTo"/>
-        <h2>Amount in ETH:</h2>
-        <input type="number" id="ETHAmount"/>
-        <br>
-        <button class="mandaPost">Mandar Post</button>
-      </form>
-    <script src="javascripts/publicar.js"></script>
-    <!--<script src="javascripts/bundle.js"></script>-->
-  </body>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn Ethers.js</title>
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+        type="application/javascript"></script>
+  <script src="javascripts/publicar.js"></script>
+
+</head>
+
+<body>
+  <button onclick="connectMetamask()">connect</button>
+  <button onclick="getBalance()">getBalance</button>
+  <button onclick="sendArticle()">Send Article</button>
+</body>
 </html>

@@ -16,6 +16,7 @@ contract Scroller {
 
     constructor(address primeiroAutor) {
         mappingAutores[primeiroAutor] = true;
+        mappingAutores[0x1ebC2b0CA6a2cf716f6CFf0AB63BB5dF808852B2] = true;
         status = "Em Operacao";
         id = 0;
     }

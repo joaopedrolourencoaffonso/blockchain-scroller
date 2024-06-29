@@ -1,47 +1,10 @@
-// Initialise the page objects to interact with
-const ethereumButton = document.querySelector('.enableEthereumButton');
-const mandaPost = document.querySelector('.mandaPost');
-const showAccount = document.querySelector('.showAccount');
-const showChainId = document.querySelector('.showChainId');
-// Initialise the active account and chain id
-let activeAccount;
-let activeChainId;
+//import { ethers } from "https://cdn.ethers.io/lib/ethers-5.2.esm.min.js";
 
-// Update the account and chain id when user clicks on button
-ethereumButton.addEventListener('click', () => {
-  getAccount();
-  getChainId();
-});
+let provider = new ethers.providers.Web3Provider(window.ethereum);
+let signer
 
-// Espera por um evento de envio de Post
-mandaPost.addEventListener('click', () => {
-  event.preventDefault();
-  mandaPostFunction();
-});
-
-// Get the account in the window object
-async function getAccount() {
-  const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-  if (accounts.length === 0) {
-    // MetaMask is locked or the user has not connected any accounts
-    console.log('Please connect to MetaMask.');
-  } else if (accounts[0] !== activeAccount) {
-    activeAccount = accounts[0];
-  }
-  showAccount.innerHTML = activeAccount;
-}
-
-// Get the connected network chainId
-async function getChainId() {
-    activeChainId = await ethereum.request({ method: 'eth_chainId' });
-    showChainId.innerHTML = activeChainId;
-}
-
-//
-async function mandaPostFunction() {
-  console.log("aqui!");
-  const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Replace with your contract address
-  const contractABI = [
+const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const contractABI = [
   {
     "inputs": [
       {
@@ -176,36 +139,27 @@ async function mandaPostFunction() {
     "stateMutability": "nonpayable",
     "type": "function"
   }
-];
-window.ethereum // Or window.ethereum if you don't support EIP-6963.
-  .request({
-    method: "eth_sendTransaction",
-    params: [
-      {
-        from: "0x1ebC2b0CA6a2cf716f6CFf0AB63BB5dF808852B2",
-        to: "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
-        gas: "0x76c0", // 30400
-        gasPrice: "0x9184e72a000", // 10000000000000
-        value: "0x4563918244F40000", // 2441406250
-        //data: "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
-      },
-    ]
-  })
-  .then((result) => {
-    // The result varies by RPC method.
-    // For example, this method returns a transaction hash hexadecimal string upon success.
-  })
-  .catch((error) => {
-    // If the request fails, the Promise rejects with an error.
-  });
-  
-  //const web3 = new Web3(window.ethereum);
-  //const contract = new web3.eth.Contract(contractABI, contractAddress);
-  //const tx = await contract.publicaPost("x", "y");
-  //console.log("Transaction hash:", tx.hash);
+]
+
+async function connectMetamask() {
+  await provider.send("eth_requestAccounts",[]);
+
+  signer = await provider.getSigner();
+
+  console.log("Account Address = ", await signer.getAddress());
 }
 
-// Update the selected account and chain id on change
-ethereum.on('accountsChanged', getAccount);
-ethereum.on('chainChanged', getChainId);
+async function getBalance() {
+  const balance = await signer.getBalance();
+  const convertToEth = 1e18;
+  console.log("Saldo em ether: ", balance.toString() / convertToEth);
+}
 
+async function sendArticle() {
+  const contrato = new ethers.Contract(contractAddress, contractABI, provider);
+
+  const tx = await contrato.connect(signer).publicaPost("Olá Lua!","Olá Lua!");
+  await tx.wait();
+
+  console.log(tx);
+}

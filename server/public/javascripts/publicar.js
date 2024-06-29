@@ -155,10 +155,16 @@ async function getBalance() {
   console.log("Saldo em ether: ", balance.toString() / convertToEth);
 }
 
-async function sendArticle() {
+async function enviarArtigo() {
+  event.preventDefault();
+  await connectMetamask();
+
+  const title = document.getElementById('articleTitle').value;
+  const articleContent = document.getElementById('articleContent').value;
+
   const contrato = new ethers.Contract(contractAddress, contractABI, provider);
 
-  const tx = await contrato.connect(signer).publicaPost("Olá Lua!","Olá Lua!");
+  const tx = await contrato.connect(signer).publicaPost(title,articleContent);
   await tx.wait();
 
   console.log(tx);

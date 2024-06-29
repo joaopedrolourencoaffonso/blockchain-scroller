@@ -13,8 +13,17 @@
 </head>
 
 <body>
-  <button onclick="connectMetamask()">connect</button>
-  <button onclick="getBalance()">getBalance</button>
-  <button onclick="sendArticle()">Send Article</button>
+  <!--<button onclick="connectMetamask()">connect</button>
+  <button onclick="getBalance()">getBalance</button>-->
+  <form>
+    <label for="articleTitle">Title:</label>
+    <input type="text" id="articleTitle" name="articleTitle" required>
+    <br>
+    <label for="articleContent">Article Content:<br></label>
+    <br>
+    <textarea id="articleContent" name="articleContent" rows="10" cols="50" required></textarea>
+    <br>
+    <button onclick="enviarArtigo()">Enviar Artigo</button>
+  </form>
 </body>
 </html>

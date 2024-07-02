@@ -19,7 +19,7 @@ async function iniciandoPagina() {
         const addressData = await addressResponse.json();
         contractAddress = addressData[0]['endereco'];
         
-        const abiResponse = await fetch('/js/contractABI.json');
+        const abiResponse = await fetch('/json/contractABI.json');
         const abiData = await abiResponse.json();
         contractABI = abiData;
 

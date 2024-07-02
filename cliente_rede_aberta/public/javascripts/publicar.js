@@ -21,7 +21,7 @@ fetch('/contractAddress')
 );
 
 // Fetch the contract ABI from the URL
-fetch('/js/contractABI.json')
+fetch('/json/contractABI.json')
   .then(response => response.json())
   .then(data => {
     contractABI = data; // Assuming the ABI is an array or object
@@ -37,8 +37,6 @@ async function connectMetamask() {
   await provider.send("eth_requestAccounts",[]);
 
   signer = await provider.getSigner();
-
-  console.log("Account Address = ", await signer.getAddress());
 }
 
 async function getBalance() {

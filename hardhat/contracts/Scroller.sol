@@ -36,7 +36,7 @@ contract Scroller {
         mappingPosts[id] = Post(id,_titulo,_conteudo);
     }
 
-    function retornaPost(uint256 inicio, uint256 fim) public returns (Post[] memory) {
+    function retornaPost(uint256 inicio, uint256 fim) public view returns (Post[] memory) {
         require(inicio <= fim, "Inicio nao pode ser maior que o fim");
         require(fim <= id, "Fim maior que o numero de posts");
 

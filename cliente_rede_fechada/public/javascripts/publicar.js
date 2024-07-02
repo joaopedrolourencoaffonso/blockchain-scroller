@@ -1,8 +1,5 @@
-//import { ethers } from "https://cdn.ethers.io/lib/ethers-5.2.esm.min.js";
-
 let provider = new ethers.providers.Web3Provider(window.ethereum);
 let signer
-
 let contractAddress;
 let contractABI;
 
@@ -10,10 +7,7 @@ let contractABI;
 fetch('/contractAddress')
   .then(response => response.json())
   .then(data => {
-    //console.log(data[0]['endereco']);
-    contractAddress = data[0]['endereco']; // Assuming the ABI is an array or object
-    // Now you can use the contractABI in your code
-    //console.log(contractAddress);
+    contractAddress = data[0]['endereco'];
   })
   .catch(error => {
     console.error('Error fetching contract ABI:', error);
@@ -24,9 +18,7 @@ fetch('/contractAddress')
 fetch('/json/contractABI.json')
   .then(response => response.json())
   .then(data => {
-    contractABI = data; // Assuming the ABI is an array or object
-    // Now you can use the contractABI in your code
-    //console.log(contractABI);
+    contractABI = data;
   })
   .catch(error => {
     console.error('Error fetching contract ABI:', error);

@@ -9,27 +9,25 @@ const port = process.env.SERVER_PORT;
 const blockchainAddress = process.env.ADDRESS;
 const blockchainPort = process.env.PORT;
 const smartContractAddress = process.env.SMART_CONTRACT_ADDRESS;
+const path_do_contrato = process.env.path_do_contrato;
 
 // Setup Web3 connection
 const web3 = new Web3(`http://${blockchainAddress}:${blockchainPort}`);
 
 // pegando a ABI do contrato
 const fs = require('fs');
-const jsonFile = '..\\hardhat\\artifacts\\contracts\\Scroller.sol\\Scroller.json'; // Adjust the path as needed
-const parsed = JSON.parse(fs.readFileSync(jsonFile));
-const contractABI = parsed.abi;
+const contractABI = JSON.parse(fs.readFileSync(path_do_contrato));
 
-// Create contract instance
+// Cria nova instância do contrato
 const contract = new web3.eth.Contract(contractABI, smartContractAddress);
 
-// Set the view engine to ejs
+// Configure engine de visualização para ejs
 app.set('view engine', 'ejs');
 
-// Serve static files from the 'public' directory
+// Configure diretório de onde pegar arquivos estáticos
 app.use(express.static('public'));
 
-// http://localhost:3000/?param1=value1&param2=value2
-// Define a route that renders the index.ejs template
+// Página principal
 app.get('/', (req, res) => {
     try {
         res.render('index');
@@ -39,6 +37,7 @@ app.get('/', (req, res) => {
     }
 });
 
+// rota para página para publicar novas matérias
 app.get('/publicar', (req, res) => {
     try {
         res.render('publicar', { enderecoDoContrato: smartContractAddress });
@@ -48,12 +47,11 @@ app.get('/publicar', (req, res) => {
     }
 });
 
+// rota para status do contrato (não do app.js, do contrato)
 app.get('/status', async (req, res) => {
     try {
-        // Call the getMessage function
         const status = await contract.methods.getStatus().call();
         
-        // Send the message as the response
         res.setHeader('Content-Type', 'application/json');
         res.send(`[{"status": "${status}"}]`);
     } catch (error) {
@@ -62,6 +60,7 @@ app.get('/status', async (req, res) => {
     }
 });
 
+// rota que retorna o endereço do contrato (para o caso do contrato for atualizado)
 app.get('/contractAddress', async (req, res) => {
     try {
         // Send the message as the response
@@ -73,6 +72,7 @@ app.get('/contractAddress', async (req, res) => {
     }
 });
 
+//rota que retorna o id mais alto atual
 app.get('/getid', async (req, res) => {
     try {
         // Call the getMessage function
@@ -87,6 +87,7 @@ app.get('/getid', async (req, res) => {
     }
 });
 
+//rota que retorna os posts em ordem decrescente com base nos ids definidos `inicio` e `fim`
 app.get('/posts/:inicio/:fim', async (req, res) => {
     try {
         const inicio = parseInt(req.params.inicio);
@@ -106,7 +107,6 @@ app.get('/posts/:inicio/:fim', async (req, res) => {
                 conteudo: post.conteudo
             }));
 
-            // Send the message as the response
             res.setHeader('Content-Type', 'application/json');
             res.send(formattedPosts);
         }
@@ -116,12 +116,12 @@ app.get('/posts/:inicio/:fim', async (req, res) => {
     }
 });
 
+// retorna todos os posts já publicados através de seus eventos
 app.get('/allPosts', async (req, res) => {
     try {
-        // Call the getMessage function
         let events = await contract.getPastEvents('allEvents', {
-            fromBlock: 0, // Start from the first block
-            toBlock: 'latest' // Up to the latest block
+            fromBlock: 0,
+            toBlock: 'latest'
         });
 
         let answerjson = '[';
@@ -130,7 +130,6 @@ app.get('/allPosts', async (req, res) => {
         }
         answerjson = answerjson.slice(0, -1) + ']';
         
-        // Send the message as the response
         res.setHeader('Content-Type', 'application/json');
         res.send(answerjson);
     } catch (error) {
@@ -139,6 +138,7 @@ app.get('/allPosts', async (req, res) => {
     }
 });
 
+//inicializa o servidor
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });

@@ -4,10 +4,12 @@ Um pequneo aplicativo de blog baseado em blockchain criado como um projeto pesso
 
 ## Status
 
-Em desenvolvimento. Atualmente o aplicativo é capaz de:
+Em desenvolvimento. O aplicativo é capaz de:
 
 - requisitar posts do smart contract e listar para o usuário leigo
 - Conectar com a metamask e permitir que autores publiquem novos posts
+
+O aplicativo vem em duas versões, uma para [redes abertas](./cliente_rede_aberta/), a qual é capaz de visualizar e publicar posts, e uma para [redes fechadas](./cliente_rede_fechada/), a qual é capaz de visualizar os posts, porém, só é capaz de publicar um post se o cliente tiver acesso a rede fechada.
 
 ## Agradecimentos
 

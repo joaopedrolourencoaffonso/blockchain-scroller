@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
 const { Web3 } = require('web3');
 
 const app = express();
@@ -26,6 +27,7 @@ app.set('view engine', 'ejs');
 
 // Configure diretório de onde pegar arquivos estáticos
 app.use(express.static('public'));
+app.use(bodyParser.json());
 
 // Página principal
 app.get('/', (req, res) => {
@@ -135,6 +137,35 @@ app.get('/allPosts', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send('Error retrieving message from smart contract');
+    }
+});
+
+app.post('/enviarArtigo', async (req, res) => {
+    const { rawTransaction } = req.body;
+  
+    try {
+      // Send the signed transaction
+      const receipt = await web3.eth.sendSignedTransaction(rawTransaction);
+      console.log('Transaction receipt:', receipt);
+      res.status(200).json(receipt);
+    } catch (error) {
+      console.error('Error sending transaction:', error);
+      res.status(500).json({ error: 'Error sending transaction' });
+    }
+});
+
+app.get('/nonce/:address', async (req, res) => {
+    //const { rawTransaction } = req.body;
+  
+    try {
+      // Send the signed transaction
+      const address = req.params.address;
+      const nonce = await web3.eth.getTransactionCount(address);
+      //console.log('Transaction receipt:', nonce);
+      res.json({ nonce: nonce.toString() });
+    } catch (error) {
+      console.error('Error sending transaction:', error);
+      res.status(500).json({ error: 'Error sending transaction' });
     }
 });
 

@@ -59,10 +59,6 @@ async function connectMetamask() {
 // Send signed transaction to server
 async function enviarArtigo() {
   event.preventDefault();
-  //await connectMetamask();
-
-  //const accounts = await web3.eth.getAccounts();
-  //const account = accounts[0];
   
   const title = document.getElementById('articleTitle').value;
   const articleContent = document.getElementById('articleContent').value;
@@ -71,9 +67,6 @@ async function enviarArtigo() {
   const account = web3.eth.accounts.privateKeyToAccount(privateKey);
   
   NONCE = await pegaNonce(account.address);
-  //console.log(NONCE);
-  //const accounts = [account];
-  //const publicKey = account.address;
   
   contract = new web3.eth.Contract(contractABI, contractAddress);
   
@@ -91,7 +84,6 @@ async function enviarArtigo() {
   
   try {
     const signedTx = await web3.eth.accounts.signTransaction(txParams, privateKey);
-    //console.log('Signed Transaction:', signedTx);
     
     // Send the signed transaction to the server
     fetch('/enviarArtigo', {

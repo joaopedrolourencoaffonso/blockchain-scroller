@@ -1,5 +1,7 @@
 // transferEth.js
 const { ethers } = require("hardhat");
+require('dotenv').config();
+const meuEndereco = process.env.MEUENDERECO;
 
 async function main() {
   try {
@@ -7,7 +9,7 @@ async function main() {
     console.log("Deploying contracts with the account:", deployer.address);
 
     // Transfer 100 ETH to the specified address
-    const recipientAddress = "0x1ebC2b0CA6a2cf716f6CFf0AB63BB5dF808852B2";
+    const recipientAddress = meuEndereco;
     const valueInWei = ethers.parseEther("100"); // Convert ETH to Wei
 
     const tx = await deployer.sendTransaction({

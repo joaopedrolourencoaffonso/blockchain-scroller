@@ -1,5 +1,6 @@
 // scripts/deploy-banner.js
-
+require('dotenv').config();
+const meuEndereco = process.env.MEUENDERECO;
 const { ethers } = require("hardhat");
 
 async function main() {
@@ -9,7 +10,7 @@ async function main() {
   console.log("Contrato deployado em:", contrato.target);
 
   const contrato2 = await Contrato.attach(contrato.target);
-  approveTx = await contrato2.addAutor("0x1ebC2b0CA6a2cf716f6CFf0AB63BB5dF808852B2");//conta da metamask
+  approveTx = await contrato2.addAutor(meuEndereco);//conta da metamask
   approveTx.wait();
 }
 

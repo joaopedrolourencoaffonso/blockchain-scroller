@@ -23,7 +23,7 @@ O presente projeto foi elaborado como um trabalho lúdico com o objetivo de prat
 
 **Não utilize** nenhum dos códigos aqui disponibilizados em ambiente de produção sem testar antes.
 
-Adicionalmente, destaca-se que o presente projeto foi desenvolvido no sistema Windows 11, portanto, o path dos arquivos está com "/" ao invés do "\" do Linux, se for executar, edite os paths do arquivo.
+Adicionalmente, destaca-se que o presente projeto foi desenvolvido no sistema Windows 11, portanto, o path dos arquivos está com "/" ao invés do "\\" do Linux, se for executar, edite os paths do arquivo.
 
 ## Agradecimentos
 

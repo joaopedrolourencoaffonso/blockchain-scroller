@@ -30,5 +30,6 @@ Adicionalmente, destaca-se que o presente projeto foi desenvolvido no sistema Wi
 - Foto de plano de fundo do aplicativo disponibilizada pela <a href="https://unsplash.com/pt-br/@nasa?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">NASA</a> na <a href="https://unsplash.com/pt-br/fotografias/foto-do-espaco-sideral-Q1p7bh3SHj8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - [Aw Kai Shin](https://medium.com/@kaishinaw?source=post_page-----99c155c56665--------------------------------) obrigado pelo excelente tutorial sobre uso do SDK da metamask: https://medium.com/@kaishinaw/connecting-metamask-to-your-web-application-express-99c155c56665
 - [Viktor on Web3](https://www.youtube.com/watch?v=x61ntVrOz_c), obrigado pelo excelente tutorial sobre como usar o ether.js e associá-lo a metamask.
+- [Jake Warren](https://medium.com/@thelasthash/solved-nonce-too-high-error-with-metamask-and-hardhat-adc66f092cd), obrigado pela ajuda com o erro de "_nonce too high_".
 
 
